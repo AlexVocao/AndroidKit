@@ -32,7 +32,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
         txtResult = findViewById(R.id.txtResult);
-        fetchMainProductName();
+        // Using Single
+        //fetchMainProductName();
+        // Using Observable
+        fetchMainProductName1();
     }
 
     @SuppressLint("CheckResult")
@@ -47,6 +50,24 @@ public class MainActivity extends AppCompatActivity {
                         },
                         throwable -> {
                             Log.d(TAG, "error = "+ throwable.getMessage());
+                        }
+                );
+    }
+    @SuppressLint("CheckResult")
+    private void fetchMainProductName1() {
+        new ApiService().getMainProductName1()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        mainProductName -> {
+                            Log.d(TAG, "main product name 1 = "+ mainProductName);
+                            updateUi(mainProductName);
+                        },
+                        throwable -> {
+                            Log.d(TAG, "error = "+ throwable.getMessage());
+                        },
+                        () -> {
+                            Log.d(TAG, "Task is successful");
                         }
                 );
     }
