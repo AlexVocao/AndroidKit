@@ -33,6 +33,8 @@ android {
 
 dependencies {
 
+    implementation(libs.rxandroid)
+    implementation(libs.rxjava)
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
