@@ -7,12 +7,9 @@ import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ShareCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -23,7 +20,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public class MainActivity extends AppCompatActivity {
     private final static String TAG = "MainActivity";
     private TextView txtResult, txtUsersResult;
-    private CompositeDisposable compositeDisposablel;
+    private CompositeDisposable compositeDisposable;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -39,13 +36,13 @@ public class MainActivity extends AppCompatActivity {
 
         txtResult = findViewById(R.id.txtResult);
         txtUsersResult = findViewById(R.id.txtUsersResult);
-        compositeDisposablel = new CompositeDisposable();
+        compositeDisposable = new CompositeDisposable();
         // Using Single
         //fetchMainProductName();
         // Using Observable
-        //fetchMainProductName1();
+        fetchMainProductName1();
         //fetchUsers();
-        fetchAllData();
+        //fetchAllData();
     }
 
     @SuppressLint("CheckResult")
@@ -102,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void fetchAllData() {
-        compositeDisposablel.add(new ApiService().getMainProductName()
+        compositeDisposable.add(new ApiService().getMainProductName()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -114,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                 )
         );
-        compositeDisposablel.add(new ApiService().getMainProductName1()
+        compositeDisposable.add(new ApiService().getMainProductName1()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -130,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                 )
         );
-        compositeDisposablel.add(new ApiService().getUsers()
+        compositeDisposable.add(new ApiService().getUsers()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -162,6 +159,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        compositeDisposablel.clear();
+        compositeDisposable.clear();
     }
 }
