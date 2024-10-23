@@ -25,8 +25,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
         DaoSession daoSession = ((MyApp)getApplication()).getDaoSession();
-        UserDao userDao = daoSession.getUserDao();
 
+        // =========================================================================================
+        // User
+        UserDao userDao = daoSession.getUserDao();
         // Insert a new User
         User user1 = new User(null, "Alice", 25);
         User user2 = new User(null, "Bobpie", 27);
@@ -39,6 +41,23 @@ public class MainActivity extends AppCompatActivity {
         // Display the results
         for (User user: users) {
             Log.d("ManActivity", "User: " + user.getName() + ", Age: " + user.getAge());
+        }
+
+        // =========================================================================================
+        // Car
+        CarDao carDao = daoSession.getCarDao();
+        // Insert a new Car
+        Car car1 = new Car(null, "BMW", 3.0);
+        Car car2 = new Car(null, "Rolls-royce", 5.0);
+        carDao.insert(car1);
+        carDao.insert(car2);
+
+        // Query all users
+        List<Car> cars = carDao.loadAll();
+
+        // Display the results
+        for (Car car: cars) {
+            Log.d("ManActivity", "Car: " + car.getName() + ", Engine: " + car.getEngine());
         }
     }
 }
