@@ -8,6 +8,7 @@ material = "1.12.0"
 activity = "1.8.0"
 constraintlayout = "2.1.4"
 greendao = "3.3.0"
+greendaoPlugin = "3.3.1"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -18,7 +19,10 @@ material = { group = "com.google.android.material", name = "material", version.r
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 greendao = { group = "org.greenrobot", name = "greendao", version.ref = "greendao" }
+greendaoPlugin = { group = "org.greenrobot", name = "greendao-gradle-plugin",version.ref = "greendaoPlugin" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
+greendao = { id = "org.greenrobot.greendao", version.ref = "greendaoPlugin" }
+
 

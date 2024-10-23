@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.androidApplication)
+    id(libs.plugins.greendao.get().pluginId)
 }
 
 android {
