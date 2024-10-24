@@ -12,16 +12,24 @@ public class UserPresenter {
     private UserModel userModel;
     private UserView userView;
 
+    public UserPresenter() {
+
+    }
     public UserPresenter(UserModel userModel, UserView userView) {
         this.userModel = userModel;
         this.userView = userView;
     }
 
+    public void loadParam(UserModel userModel, UserView userView) {
+        this.userModel = userModel;
+        this.userView = userView;
+    }
     public void loadUser() {
-        if (userModel != null) {
+        boolean isValid =  userModel.getId() != 0 && !userModel.getName().isEmpty();
+        if (isValid) {
             userView.showUser(userModel);
         } else {
-            userView.showError("User not found");
+            userView.showError("Invalid user");
         }
     }
 }

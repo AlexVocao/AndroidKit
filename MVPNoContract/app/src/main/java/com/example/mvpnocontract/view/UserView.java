@@ -6,4 +6,5 @@ public interface UserView {
     void showUser(UserModel userModel);
 
     void showError(String error);
+    void confirm();
 }
